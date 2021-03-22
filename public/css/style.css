@@ -1,0 +1,39 @@
+form {
+    margin: 50px 0;
+}
+
+.form-check-inline {
+    margin: 0 5px 10px 0;
+}
+
+[type="checkbox"] {
+    display: none;
+}
+
+.form-check-label {
+    transition: all 144ms ease-in-out;
+}
+.form-check-label:hover {
+    -webkit-transform: scale(0.975);
+    transform: scale(0.975);
+}
+.form-check-label::before {
+    display: inline-block;
+    margin-right: 2px;
+    transition: -webkit-transform 144ms ease-in-out;
+    transition: transform 144ms ease-in-out;
+    transition: transform 144ms ease-in-out, -webkit-transform 144ms ease-in-out;
+    content: '+';
+}
+
+[type="checkbox"]:not(:checked) + .form-check-label,
+[type="checkbox"]:not(:checked) + .form-check-label:hover {
+    background-color: transparent;
+    color: #363636;
+    border-color: currentColor;
+}
+
+[type="checkbox"]:checked + .form-check-label::before {
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

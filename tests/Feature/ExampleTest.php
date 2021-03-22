@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Article;
+use App\Tags;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -35,15 +36,19 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest2()
     {
-        Article::query()->forceDelete();
+        Tags::query()->forceDelete();
 
-        $response = $this->json('POST', '/admin/articles', [
-            'title' => 'hahaha',
-            'body' => '1111',
-            'aaaa' => 1111,
+        $response = $this->json('POST', '/admin/tags', [
+            'tag_name' => 'hahaha',
+        ],[
+
         ]);
+
 
         dd($response);
 //        $response->assertStatus(200);
     }
+
+
+
 }

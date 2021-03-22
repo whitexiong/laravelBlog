@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Tag_mapping;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -98,7 +99,35 @@ class ArticleController extends Controller
                     'body'  => $articles[0]->body
                 );
 
-                return view('admin/article/edit', $articlesArr);
+
+
+                //读取标签
+                $tags = DB::table('tag_mapping')
+                    ->where('article_id', '=',$article_id)
+                    ->get();
+
+
+                //封装标签id
+                $tagIdData = array();
+                $i = 0;
+                foreach ($tags as $tag){
+                    if(isset($tag)){
+                        $tagIdData[$i] = $tag->tag_id;
+                        $i++;
+                    }
+                }
+
+
+
+                //查询对应的标签
+                $tags = DB::table('tags')
+                        ->whereIn('id',$tagIdData)
+                        ->get();
+
+//                dd($tags);
+
+
+                return view('admin/article/edit', $articlesArr)->with('tag', $tags);
 
         }
     }
@@ -120,12 +149,27 @@ class ArticleController extends Controller
 //            'body' => 'required'
 //        ])->validate();
 
+
+
+        dd($request->all());
+
+
+
         $articles =  $request->all();
-        $articlesData = new Article();
+        $articlesData = new Article(); //文章更新
+        $tagMpping = new Tag_mapping(); //标签更新
+
 
 
         $data['title'] = $articles['title'];
         $data['body'] = $articles['body'];
+
+
+        //ToDO LIST
+//        $tagMappingData = [
+//            'article_id' => $articles->id,
+//            'tag_id'    =>  $articles
+//        ];
 
 
         $affect =  DB::table('articles')->where('id', '=', $articles['id'])->update($data);
@@ -134,19 +178,11 @@ class ArticleController extends Controller
             return redirect('admin/articles');
         }else{
 
-
             //TODO
             return redirect()->back()->withInput()->withSuccess("更新成功");
         }
 
 
-
-
-
-
-//        if($flag){
-//
-//        }
     }
 
 

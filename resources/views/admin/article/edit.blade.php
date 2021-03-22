@@ -20,11 +20,46 @@
                             {!! csrf_field() !!}
 
                             <input type="hidden" name="id" value="{{ $id }}">
-
+                            <span class="btn btn-default btn-lg">标题</span>
                             <input type="text" name="title" class="form-control" required="required" value="{{ $title }}">
                             <br>
-                            <textarea name="body" rows="10" class="form-control" required="required">{{ $body }}</textarea>
+                            <span class="btn btn-default btn-lg">文章内容</span>
+                            <textarea name="body" rows="12" class="form-control" required="required">{{ $body }}</textarea>
                             <br>
+
+                            <div class="container">
+                                <div class="row justify-content-sm-center">
+                                    <div class="col-sm-10 col-md-12 col-lg-5">
+                                        <fieldset>
+                                            <legend>添加标签</legend>
+
+
+                                            <table>
+
+
+
+                                                @foreach($tag as $tags)
+
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="checkbox" id="tag_id_{{ $tags->id }}" name="tag_id_{{ $tags->id }}" value="{{ $tags->id }}">
+                                                        <label class="form-check-label btn btn-success" for="tag_id_{{ $tags->id }}">{{ $tags->tag_name }}</label>
+                                                    </div>
+                                                @endforeach
+
+
+                                            </table>
+
+
+                                        </fieldset>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
                             <button class="btn btn-lg btn-info">更新</button>
                         </form>
                     </div>

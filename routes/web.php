@@ -22,15 +22,18 @@ Auth::routes();
 
 
 
+
 //修改主路徑
 Route::get('/', 'HomeController@index')->name('home');
 
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
+//Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('/', 'HomeController@index');
     Route::resource('articles', 'ArticleController');  //單數變爲複數
     Route::post('comment', 'CommentController@store'); //评论提交地址
     Route::get('article/{id}', 'ArticleController@show'); //文章详情评论展示页面
+
 
     Route::resource('tags', 'TagController');  //标签列表
     Route::post('tags/create', 'TagController@store'); //标签提交
