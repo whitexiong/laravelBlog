@@ -11,6 +11,8 @@
 
                         <a href="{{ url('admin/articles') }}" class="btn btn-lg btn-success col-xs-12">管理文章</a>
 
+                        <a href="{{ url('admin/tags') }}" class="btn btn-lg btn-warning col-xs-12">管理标签</a>
+
                     </div>
                 </div>
             </div>

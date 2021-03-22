@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use App\Article;
 
@@ -48,7 +47,7 @@ class ArticleController extends Controller
         $article->body = $request->get('body');
         $article->user_id = $request->user()->id;
 
-
+//        dd($article);
 
         if ($article->save()) {
             return redirect('admin/articles');
@@ -135,6 +134,8 @@ class ArticleController extends Controller
             return redirect('admin/articles');
         }else{
 
+
+            //TODO
             return redirect()->back()->withInput()->withSuccess("更新成功");
         }
 
